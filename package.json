@@ -19,13 +19,13 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "build-to-pkg": "tsc --p ./tsconfig.lib.json && vite build",
+    "build": "tsc --p ./tsconfig.lib.json && vite build",
+    "build-by-default": "tsc -b && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "preview": "vite preview",
     "prepare": "husky install",
-    "prepublishOnly": "npm run build-for-pkg",
+    "prepublishOnly": "npm run build",
     "start": "vite"
   },
   "peerDependencies": {
