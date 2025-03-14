@@ -1,14 +1,17 @@
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
+
 import { glob } from 'glob';
-import { extname, relative, resolve } from 'node:path';
 import { defineConfig as defineViteConfig, mergeConfig } from 'vite';
 import { defineConfig as defineVitestConfig } from 'vitest/config';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
+
+import { extname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // https://vite.dev/config/
 const viteConfig = defineViteConfig({
-  plugins: [react(), dts({ include: ['lib'] })],
+  plugins: [react(), libInjectCss(), dts({ tsconfigPath: './tsconfig.lib.json' })],
   build: {
     // Do not allow Vite copies all files from the public directory to the
     //  output folder.
@@ -36,6 +39,7 @@ const viteConfig = defineViteConfig({
           ]),
       ),
       output: {
+        // Put chunk styles at <output>/assets
         assetFileNames: 'assets/[name][extname]',
         entryFileNames: '[name].js',
       },

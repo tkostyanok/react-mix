@@ -1,10 +1,21 @@
 import type { BasicButtonProps } from './BasicButtonProps';
 
+import styles from './BasicButton.module.css';
+
 /**
  * Basic Button with text.
  */
-export const BasicButton = ({ text, ...props }: BasicButtonProps) => {
-  text = text || 'Save';
+export const BasicButton = ({ props = {}, text }: BasicButtonProps) => {
+  const { className, ...restProps } = props;
 
-  return <button {...props}>{text}</button>;
+  return (
+    <button
+      className={`${className} ${styles.button}`}
+      {...restProps}
+    >
+      {text}
+    </button>
+  );
 };
+
+export { BasicButton as default };
